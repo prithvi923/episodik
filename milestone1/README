@@ -1,0 +1,10 @@
+Lena Jia, Prithvi Prabahar, Tim Shih, and Bryan Yang
+COMPSCI 316
+October 18th, 2012
+Milestone 1
+SQL Table Setup
+
+We are using MySQL for this project. To create and load the database and its tables, run setup.sql.
+After running that file, run TEST-SAMPLE.sql to modify the data in the tables as well as test the constraints.
+
+The output of running both the setup.sql and TEST-SAMPLE.sql files are stored in TEST-SAMPLE.out.

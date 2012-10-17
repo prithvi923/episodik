@@ -1,0 +1,139 @@
+mysql> source setup.sql
+Query OK, 5 rows affected (0.06 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+Query OK, 7 rows affected (0.00 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
++---------+------------------+----------------------------------+
+| user_id | email            | password                         |
++---------+------------------+----------------------------------+
+|       1 | lena@duke.edu    | cadf2033238d68e00409822f3f3695f1 |
+|       2 | prithvi@duke.edu | 07edf9851ef7c07699162996ffe8dd8d |
+|       3 | tim@duke.edu     | 921ad0ce61b84a7b30538250ac662a74 |
+|       4 | bryan@duke.edu   | 361370a5045b5d3c6f74af5f81e3b1b1 |
+|       5 | devil@duke.edu   | a89e9e8ce09ae997232765a6eb0d2508 |
++---------+------------------+----------------------------------+
+5 rows in set (0.00 sec)
+
++---------+---------------+------+---------+---------+----------+----------------+
+| show_id | name          | year | genre   | seasons | network  | episode_length |
++---------+---------------+------+---------+---------+----------+----------------+
+|       1 | Lost          | 2010 | Drama   |       7 | ABC      |             41 |
+|       2 | Modern Family | 2012 | Comedy  |       3 | ABC      |             23 |
+|       3 | Dexter        | 2012 | Mystery |       6 | Showtime |             42 |
+|       4 | White Collar  | 2012 | Drama   |       4 | USA      |             41 |
+|       5 | Breaking Bad  | 2012 | Drama   |       6 | AMC      |             41 |
+|       6 | The Office    | 2012 | Comedy  |       7 | NBC      |             22 |
+|       7 | Survivor      | 2012 | Reality |      12 | CBS      |             43 |
++---------+---------------+------+---------+---------+----------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> source TEST-SAMPLE.sql
+ERROR 1062 (23000): Duplicate entry 'devil@duke.edu' for key 'email'
+Query OK, 1 row affected (0.00 sec)
+
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+ERROR 1062 (23000): Duplicate entry '9-1-7' for key 'PRIMARY'
+ERROR 1644 (45000): The Hot show_id and the Not show_id are not a valid combination
+ERROR 1644 (45000): The Hot show_id and the Not show_id are not a valid combination
+ERROR 1644 (45000): The Hot show_id and the Not show_id are not a valid combination
+ERROR 1048 (23000): Column 'user_id' cannot be null
+ERROR 1062 (23000): Duplicate entry 'Lost-2010' for key 'name'
+ERROR 1048 (23000): Column 'name' cannot be null
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+ERROR 1644 (45000): Invalid rating
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`testbase`.`history`, CONSTRAINT `history_ibfk_2` FOREIGN KEY (`show_id`) REFERENCES `tvshow` (`show_id`))
+ERROR 1048 (23000): Column 'rating' cannot be null
+ERROR 1062 (23000): Duplicate entry '9-2' for key 'PRIMARY'
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
++---------+--------------------+----------------------------------+
+| user_id | email              | password                         |
++---------+--------------------+----------------------------------+
+|       1 | lena@duke.edu      | cadf2033238d68e00409822f3f3695f1 |
+|       2 | prithvi@duke.edu   | 07edf9851ef7c07699162996ffe8dd8d |
+|       3 | tim@duke.edu       | 921ad0ce61b84a7b30538250ac662a74 |
+|       4 | bryan@duke.edu     | 361370a5045b5d3c6f74af5f81e3b1b1 |
+|       5 | devil@duke.edu     | a89e9e8ce09ae997232765a6eb0d2508 |
+|       9 | bluedevil@duke.edu | 5e9d11a14ad1c8dd77e98ef9b53fd1ba |
++---------+--------------------+----------------------------------+
+6 rows in set (0.00 sec)
+
++---------+---------------+------+---------+---------+----------+----------------+
+| show_id | name          | year | genre   | seasons | network  | episode_length |
++---------+---------------+------+---------+---------+----------+----------------+
+|       1 | Lost          | 2010 | Drama   |       7 | ABC      |             41 |
+|       2 | Modern Family | 2012 | Comedy  |       3 | ABC      |             23 |
+|       3 | Dexter        | 2012 | Mystery |       6 | Showtime |             42 |
+|       4 | White Collar  | 2012 | Drama   |       4 | USA      |             41 |
+|       5 | Breaking Bad  | 2012 | Drama   |       6 | AMC      |             41 |
+|       6 | The Office    | 2012 | Comedy  |       7 | NBC      |             22 |
+|       7 | Survivor      | 2012 | Reality |      12 | CBS      |             43 |
++---------+---------------+------+---------+---------+----------+----------------+
+7 rows in set (0.00 sec)
+
++---------+---------+---------+
+| user_id | hot_sid | not_sid |
++---------+---------+---------+
+|       9 |       1 |       7 |
+|       9 |       2 |       1 |
+|       9 |       2 |       4 |
+|       9 |       2 |       5 |
+|       9 |       2 |       7 |
+|       9 |       3 |       1 |
+|       9 |       4 |       3 |
+|       9 |       5 |       1 |
+|       9 |       5 |       4 |
+|       9 |       5 |       7 |
++---------+---------+---------+
+10 rows in set (0.01 sec)
+
++---------+---------+--------+
+| user_id | show_id | rating |
++---------+---------+--------+
+|       9 |       2 |      5 |
+|       9 |       7 |      3 |
++---------+---------+--------+
+2 rows in set (0.00 sec)
+
++---------+---------+
+| user_id | show_id |
++---------+---------+
+|       9 |       6 |
++---------+---------+
+1 row in set (0.00 sec)
+
+mysql> exit
