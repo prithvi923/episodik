@@ -19,26 +19,26 @@ INSERT INTO user (email, password) VALUES
 
 -- After registration, bluedevil@duke.edu user makes a series of 10 comparisons between TV shows:
 INSERT INTO preferences (user_id, hot_sid, not_sid) VALUES
-    (9, 1, 7),
-    (9, 3, 1),
-    (9, 4, 3),
-    (9, 5, 4),
-    (9, 2, 5),
-    (9, 2, 1),
-    (9, 5, 1),
-    (9, 5, 7),
-    (9, 2, 4),
-    (9, 2, 7);
+    (7, 1, 7),
+    (7, 3, 1),
+    (7, 4, 3),
+    (7, 5, 4),
+    (7, 2, 5),
+    (7, 2, 1),
+    (7, 5, 1),
+    (7, 5, 7),
+    (7, 2, 4),
+    (7, 2, 7);
 
 -- Invalid preference queries fail:
 INSERT INTO preferences (user_id, hot_sid, not_sid) VALUES
-    (9, 1, 7); -- Already exists
+    (7, 1, 7); -- Already exists
 INSERT INTO preferences (user_id, hot_sid, not_sid) VALUES
-    (9, 7, 1); -- Combination already exists
+    (7, 7, 1); -- Combination already exists
 INSERT INTO preferences (user_id, hot_sid, not_sid) VALUES
-    (9, 1, 1); -- Both SID's cannot match
+    (7, 1, 1); -- Both SID's cannot match
 INSERT INTO preferences (user_id, hot_sid, not_sid) VALUES
-    (6, 1, 1); -- References a user that does not exist
+    (7, 1, 1); -- References a user that does not exist
 INSERT INTO preferences (user_id, hot_sid, not_sid) VALUES
     (null, 1, 1); -- Null field
 
