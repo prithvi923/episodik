@@ -66,25 +66,25 @@ INSERT INTO history (user_id, show_id, rating) VALUES
 -- Users can update only their password and ratings of tv shows at this time:
 UPDATE user
 SET password=MD5('newpassword')
-WHERE user_id = 9 AND password=MD5('bluedevilpassword');
+WHERE user_id = 7 AND password=MD5('bluedevilpassword');
 
 UPDATE history
 SET rating = 3
-WHERE user_id = 9 AND show_id = 7;
+WHERE user_id = 7 AND show_id = 7;
 
--- Create a recommendation for user 9 based on simple algorithm
+-- Create a recommendation for user 7 based on simple algorithm
 INSERT INTO recommendations (user_id, show_id)
 SELECT * FROM
-    (SELECT 9, show_id
+    (SELECT 7, show_id
     FROM tvshow
     WHERE genre = 
         (SELECT genre FROM
             (SELECT * FROM 
             (SELECT hot_sid, COUNT(*) AS count FROM preferences 
-            WHERE user_id = 9
+            WHERE user_id = 7
             GROUP BY hot_sid) AS groups
             HAVING count = (SELECT MAX(count) FROM (SELECT hot_sid, COUNT(*) AS count FROM preferences 
-            WHERE user_id = 9
+            WHERE user_id = 7
             GROUP BY hot_sid) AS groups2)
             ) AS popular, tvshow
         WHERE popular.hot_sid = tvshow.show_id)
