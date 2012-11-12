@@ -50,18 +50,18 @@ INSERT INTO tvshow (name, year, genre, seasons, network, episode_length) VALUES
 
 -- After selecting preferences, user can rate shows he has already seen:
 INSERT INTO history (user_id, show_id, rating) VALUES
-    (9, 2, 5),
-    (9, 7, 0);
+    (7, 2, 5),
+    (7, 7, 0);
 
 -- Invalid history queries fail
 INSERT INTO history (user_id, show_id, rating) VALUES
-    (9, 2, 6); -- Cannot have 6-star rating
+    (7, 2, 6); -- Cannot have 6-star rating
 INSERT INTO history (user_id, show_id, rating) VALUES
-    (9, 8, 3); -- Cannot reference show_id that does not exist
+    (7, 8, 3); -- Cannot reference show_id that does not exist
 INSERT INTO history (user_id, show_id, rating) VALUES
-    (9, 2, null); -- Cannot have null field
+    (7, 2, null); -- Cannot have null field
 INSERT INTO history (user_id, show_id, rating) VALUES
-    (9, 2, 5); -- Already exists
+    (7, 2, 5); -- Already exists
 
 -- Users can update only their password and ratings of tv shows at this time:
 UPDATE user
