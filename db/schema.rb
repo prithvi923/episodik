@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113014253) do
+ActiveRecord::Schema.define(:version => 20121113031824) do
 
   create_table "genres", :id => false, :force => true do |t|
     t.integer "show_id",                :null => false
@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(:version => 20121113014253) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
+    t.string   "remember_token"
   end
+
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end
