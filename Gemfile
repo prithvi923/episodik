@@ -9,6 +9,7 @@ gem 'bootstrap-sass', '2.1'
 group :development do
 	gem 'mysql2', '0.3.11'
     gem 'annotate', '2.5.0'
+    gem 'bcrypt-ruby', '3.0.1'
 end
 
 gem 'json'
