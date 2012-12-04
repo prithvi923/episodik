@@ -49,6 +49,14 @@
           </td>
         </tr>
       </table>
+      <p>
+        <% if @histories.any? %>
+          <%= @histories.count %>
+          <% @histories.each_with_index do |history, i| %>
+              <%= history.rating %>
+          <% end %>
+        <% end %>
+      </p>
     </section>
   </aside>
 </div>

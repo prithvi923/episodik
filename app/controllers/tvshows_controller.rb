@@ -13,6 +13,7 @@ class TvshowsController < ApplicationController
   def show
     @tvshow = Tvshow.find(params[:id])
     @genres = @tvshow.genres
+    @histories = @tvshow.histories.where(:user_id => current_user.id) #.find(:all, :conditions => ['user_id = ?', "#{current_user.id}"])
 
     respond_to do |format|
       format.html # show.html.erb
