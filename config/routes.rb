@@ -1,4 +1,5 @@
 Episodik::Application.routes.draw do
+  resources :tvshows
   resources :users
   resources :sessions, :only => [:new, :create, :destroy]
 
@@ -9,6 +10,8 @@ Episodik::Application.routes.draw do
   match '/signout'=> 'sessions#destroy', :via => :delete
 
   match '/help' => 'static_pages#help'
+
+  match '/shows' => 'tvshows#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

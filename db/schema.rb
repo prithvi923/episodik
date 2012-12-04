@@ -10,18 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113031824) do
+ActiveRecord::Schema.define(:version => 20121204142548) do
 
   create_table "genres", :id => false, :force => true do |t|
     t.integer "show_id",                :null => false
     t.string  "genre",   :limit => 100, :null => false
   end
 
+  create_table "history", :id => false, :force => true do |t|
+    t.integer   "user_id",    :null => false
+    t.integer   "show_id",    :null => false
+    t.integer   "rating",     :null => false
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
+  end
+
   create_table "tvshow", :primary_key => "show_id", :force => true do |t|
     t.string  "name",           :limit => 100, :null => false
     t.integer "year",                          :null => false
     t.integer "seasons",                       :null => false
-    t.string  "network",        :limit => 100, :null => false
     t.integer "episode_length",                :null => false
   end
 
@@ -37,6 +44,15 @@ ActiveRecord::Schema.define(:version => 20121113031824) do
   end
 
   add_index "tvshow_complete", ["name", "year"], :name => "name", :unique => true
+
+  create_table "tvshows", :primary_key => "show_id", :force => true do |t|
+    t.string   "name"
+    t.integer  "year"
+    t.integer  "seasons"
+    t.integer  "episode_length"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
