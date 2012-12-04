@@ -7,3 +7,13 @@ desc "Import shows."
       t.save
     end
   end
+
+desc "Import histories." 
+  task :import_histories => :environment do
+    my_sql = "SELECT * FROM history;"
+    ActiveRecord::Base.connection.execute(my_sql).each do |row|
+      user_id, show_id, rating = row
+      h = History.new(:user_id => user_id, :show_id => show_id, :rating => rating)
+      h.save
+    end
+  end

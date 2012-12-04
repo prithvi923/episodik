@@ -10,11 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204142548) do
+ActiveRecord::Schema.define(:version => 20121204180622) do
 
   create_table "genres", :id => false, :force => true do |t|
     t.integer "show_id",                :null => false
     t.string  "genre",   :limit => 100, :null => false
+  end
+
+  create_table "histories", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "show_id"
+    t.integer  "rating"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "history", :id => false, :force => true do |t|

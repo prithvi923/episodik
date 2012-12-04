@@ -12,6 +12,7 @@ class TvshowsController < ApplicationController
 
   def show
     @tvshow = Tvshow.find(params[:id])
+    @genres = @tvshow.genres
 
     respond_to do |format|
       format.html # show.html.erb

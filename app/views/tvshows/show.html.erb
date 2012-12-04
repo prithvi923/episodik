@@ -17,10 +17,27 @@
         </tr>
         <tr>
           <td style="text-align: right;">
+            <b>Genres:</b>
+          </td>
+          <td style="padding-left: 10px;">
+            <% if @tvshow.genres.any? %>
+              <% @genres.each_with_index do |genre, i| %>
+                  <%= genre.genre %>
+                  <% if i != @tvshow.genres.count - 1 %>
+                   |
+                  <% end %>
+              <% end %>
+            <% else %>
+              None
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: right;">
             <b>Episode Length:</b>
           </td>
           <td style="padding-left: 10px;">
-            <%= @tvshow.episode_length %>
+            <%= @tvshow.episode_length %> min
           </td>
         </tr>
         <tr>
