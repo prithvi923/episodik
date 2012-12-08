@@ -10,12 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208153826) do
+ActiveRecord::Schema.define(:version => 20121208182052) do
 
   create_table "genres", :id => false, :force => true do |t|
     t.integer "show_id",                :null => false
     t.string  "genre",   :limit => 100, :null => false
   end
+
+  add_index "genres", ["show_id", "genre"], :name => "index_genres_on_show_id_and_genre", :unique => true
 
   create_table "histories", :force => true do |t|
     t.integer  "user_id"
@@ -27,14 +29,6 @@ ActiveRecord::Schema.define(:version => 20121208153826) do
 
   add_index "histories", ["show_id", "user_id"], :name => "index_histories_on_show_id_and_user_id", :unique => true
 
-  create_table "history", :id => false, :force => true do |t|
-    t.integer   "user_id",    :null => false
-    t.integer   "show_id",    :null => false
-    t.integer   "rating",     :null => false
-    t.timestamp "created_at", :null => false
-    t.timestamp "updated_at", :null => false
-  end
-
   create_table "preferences", :force => true do |t|
     t.integer "user_id"
     t.integer "hot_sid"
@@ -44,26 +38,6 @@ ActiveRecord::Schema.define(:version => 20121208153826) do
   add_index "preferences", ["hot_sid", "not_sid", "user_id"], :name => "index_preferences_on_hot_sid_and_not_sid_and_user_id", :unique => true
   add_index "preferences", ["not_sid"], :name => "not_sid"
   add_index "preferences", ["user_id", "hot_sid", "not_sid"], :name => "index_preferences_on_user_id_and_hot_sid_and_not_sid"
-
-  create_table "tvshow", :primary_key => "show_id", :force => true do |t|
-    t.string  "name",           :limit => 100, :null => false
-    t.integer "year",                          :null => false
-    t.integer "seasons",                       :null => false
-    t.integer "episode_length",                :null => false
-  end
-
-  add_index "tvshow", ["name", "year"], :name => "name", :unique => true
-
-  create_table "tvshow_complete", :primary_key => "show_id", :force => true do |t|
-    t.string  "name",           :limit => 100, :null => false
-    t.integer "year",                          :null => false
-    t.string  "genre",          :limit => 100, :null => false
-    t.integer "seasons",                       :null => false
-    t.string  "network",        :limit => 100, :null => false
-    t.integer "episode_length",                :null => false
-  end
-
-  add_index "tvshow_complete", ["name", "year"], :name => "name", :unique => true
 
   create_table "tvshows", :primary_key => "show_id", :force => true do |t|
     t.string   "name"
