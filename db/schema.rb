@@ -12,9 +12,9 @@
 
 ActiveRecord::Schema.define(:version => 20121208182052) do
 
-  create_table "genres", :id => false, :force => true do |t|
-    t.integer "show_id",                :null => false
-    t.string  "genre",   :limit => 100, :null => false
+  create_table "genres", :force => true do |t|
+    t.integer "show_id"
+    t.string  "genre"
   end
 
   add_index "genres", ["show_id", "genre"], :name => "index_genres_on_show_id_and_genre", :unique => true
