@@ -1,12 +1,12 @@
 // Sets up the stars to match the data when the page is loaded.
 $(function () {
     var checkedId = $('form.rating_ballot > input:checked').attr('id');
-    console.log(checkedId);
     $('form.rating_ballot > label[for=' + checkedId + ']').prevAll().andSelf().addClass('bright');
 });
 
 $(document).ready(function() {
     // Makes stars glow on hover.
+    var checkedId = $('form.rating_ballot > input:checked').attr('id');
     $('form.rating_ballot > label').hover(
         function() {    // mouseover
             $(this).prevAll().andSelf().addClass('glow');
@@ -23,5 +23,6 @@ $(document).ready(function() {
     // Submits the form (saves data) after user makes a change.
     $('form.rating_ballot').change(function() {
         $('form.rating_ballot').submit();
+        if (!checkedId) location.reload();
     });
 });

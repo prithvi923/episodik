@@ -9,7 +9,7 @@ class HistoriesController < ApplicationController
     if @history.save
         respond_to do |format|
             format.html { redirect_to tvshow_path(@tvshow), :notice => "Your rating has been saved" }
-            format.js { redirect_to user_path(@user), :notice => "Your rating has been saved" }
+            format.js { redirect_to user_path(current_user), :notice => "Your rating has been saved" }
         end
     end
   end

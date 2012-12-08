@@ -1,10 +1,10 @@
 class PreferencesController < ApplicationController
   before_filter :signed_in_user, :only => [:create, :update]
 
-  def show
+  def new
     @matchup = Tvshow.where(
         "tvshows.show_id NOT IN (SELECT hot_sid FROM preferences WHERE user_id = :user_id) AND tvshows.show_id NOT IN (SELECT not_sid FROM preferences WHERE user_id = :user_id)",
-        { :user_id => params[:id]}
+        { :user_id => current_user.id}
     ).shuffle[0..2]
   end
 
@@ -20,9 +20,9 @@ class PreferencesController < ApplicationController
       respond_to do |format|
               format.html { 
                 if current_user.preferences.count < 10
-                  redirect_to preference_path(current_user.id), :notice => "Your preference has been saved" 
+                  redirect_to new_preference_path, :notice => "Your preference has been saved" 
                 else
-                  redirect_to user_path(current_user)
+                  redirect_to current_user
                 end
               }
       end

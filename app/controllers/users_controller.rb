@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     if @user.preferences.count < 10
-      redirect_to preference_path(params[:id]) and return
+      redirect_to new_preference_path and return
     end
     @rated_shows = @user.rated_shows
 
