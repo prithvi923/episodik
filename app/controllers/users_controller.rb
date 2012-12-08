@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    if @user.preferences.count == 0
+    if @user.preferences.count < 10
       redirect_to preference_path(params[:id]) and return
     end
     @rated_shows = @user.rated_shows
