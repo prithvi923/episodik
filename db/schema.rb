@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204180622) do
+ActiveRecord::Schema.define(:version => 20121208153826) do
 
   create_table "genres", :id => false, :force => true do |t|
     t.integer "show_id",                :null => false
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20121204180622) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "histories", ["show_id", "user_id"], :name => "index_histories_on_show_id_and_user_id", :unique => true
+
   create_table "history", :id => false, :force => true do |t|
     t.integer   "user_id",    :null => false
     t.integer   "show_id",    :null => false
@@ -32,6 +34,16 @@ ActiveRecord::Schema.define(:version => 20121204180622) do
     t.timestamp "created_at", :null => false
     t.timestamp "updated_at", :null => false
   end
+
+  create_table "preferences", :force => true do |t|
+    t.integer "user_id"
+    t.integer "hot_sid"
+    t.integer "not_sid"
+  end
+
+  add_index "preferences", ["hot_sid", "not_sid", "user_id"], :name => "index_preferences_on_hot_sid_and_not_sid_and_user_id", :unique => true
+  add_index "preferences", ["not_sid"], :name => "not_sid"
+  add_index "preferences", ["user_id", "hot_sid", "not_sid"], :name => "index_preferences_on_user_id_and_hot_sid_and_not_sid"
 
   create_table "tvshow", :primary_key => "show_id", :force => true do |t|
     t.string  "name",           :limit => 100, :null => false

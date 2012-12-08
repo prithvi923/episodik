@@ -1,6 +1,8 @@
 Episodik::Application.routes.draw do
   resources :tvshows
   resources :users
+  resources :histories
+  resources :preferences
   resources :sessions, :only => [:new, :create, :destroy]
 
   root :to => 'static_pages#home'
@@ -12,6 +14,8 @@ Episodik::Application.routes.draw do
   match '/help' => 'static_pages#help'
 
   match '/shows' => 'tvshows#index'
+
+  match '/make_preferences' => 'preferences#make_preferences'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

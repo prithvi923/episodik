@@ -13,7 +13,9 @@
 class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_secure_password
-  has_many :history, :foreign_key => "user_id"
+  has_many :histories, :foreign_key => "user_id"
+  has_many :rated_shows, :through => :histories, :source => :tvshow
+  has_many :preferences, :foreign_key => "user_id"
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token

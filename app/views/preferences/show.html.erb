@@ -1,0 +1,20 @@
+<% provide(:title, "Choose your Preferences") %>
+<div class="row">
+  <% content_for(:scripts) do %>
+  <%= javascript_include_tag 'preferences_form' %>
+  <% end %>
+  <% if @matchups %>
+    <%= form_tag("/make_preferences", :method => "post", :class => "preferences") do %>
+    <% @matchups.each_with_index { |shows, i| %>
+      <%= radio_button_tag("preference[#{i}]", shows[0].show_id) %>
+      <%= label_tag(:show, shows[0].name) %>
+      <%= radio_button_tag("preference[#{i}]", shows[1].show_id) %>
+      <%= label_tag(:show, shows[1].name) %>
+      <li>
+        <%= shows[0].name %> vs. <%= shows[1].name %>
+      </li>
+    <% } %>
+    <%= submit_tag "Submit", :name => nil %>
+    <% end %>
+  <% end %>
+</div>

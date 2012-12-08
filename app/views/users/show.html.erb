@@ -3,9 +3,25 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
+      <%= gravatar_for @user %>
+      <%= @user.name %>
       </h1>
     </section>
+    <% if @rated_shows %>
+    <p>
+      Your Rated Shows:
+    </p>
+    <ul>
+      <% @rated_shows.each_with_index do |show, i| %>
+      <li>
+        <%= link_to show.name, show %>
+      </li>
+      <% end %>
+    </ul>
+    <% else %>
+    <p>
+      No shows rated yet! 
+    </p>
+    <% end %>
   </aside>
 </div>

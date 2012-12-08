@@ -49,14 +49,34 @@
           </td>
         </tr>
       </table>
-      <p>
-        <% if @histories.any? %>
-          <%= @histories.count %>
-          <% @histories.each_with_index do |history, i| %>
-              <%= history.rating %>
+      <br>
+      <div>
+        <div class="pull-left">
+          <p>
+            Your Rating:
+          </p> 
+        </div>
+        <div class="pull-left">
+          <% content_for(:scripts) do %>
+          <%= javascript_include_tag 'rating_ballot' %>
           <% end %>
-        <% end %>
-      </p>
+          <%= form_for(rating_ballot, :remote => true, :html => { :class => 'rating_ballot' }) do |f| %>
+          <%= f.label("value_1", content_tag(:span, '1'), {:class=>"history", :id=>"1"}) %>
+          <%= radio_button_tag("history[value]", 1, current_user_rating == 1, :class => 'history_button') %>
+          <%= f.label("value_2", content_tag(:span, '2'), {:class=>"history", :id=>"2"}) %>
+          <%= radio_button_tag("history[value]", 2, current_user_rating == 2, :class => 'history_button') %>
+          <%= f.label("value_3", content_tag(:span, '3'), {:class=>"history", :id=>"3"}) %>
+          <%= radio_button_tag("history[value]", 3, current_user_rating == 3, :class => 'history_button') %>
+          <%= f.label("value_4", content_tag(:span, '4'), {:class=>"history", :id=>"4"}) %>
+          <%= radio_button_tag("history[value]", 4, current_user_rating == 4, :class => 'history_button') %>
+          <%= f.label("value_5", content_tag(:span, '5'), {:class=>"history", :id=>"5"}) %>
+          <%= radio_button_tag("history[value]", 5, current_user_rating == 5, :class => 'history_button') %>
+
+          <%= hidden_field_tag("show_id", @tvshow.show_id) %>
+          <%= f.submit :Submit, :style => "display: none;" %>
+          <% end %>
+        </div>
+      </div>
     </section>
   </aside>
 </div>
