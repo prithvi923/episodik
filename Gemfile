@@ -33,7 +33,7 @@ end
 gem 'jquery-rails'
 
 group :production do
-	gem 'mysql2', '0.3.11'
+	gem 'pg', '0.12.2'
 end
 
 # To use ActiveModel has_secure_password
