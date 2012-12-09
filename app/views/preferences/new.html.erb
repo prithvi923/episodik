@@ -1,18 +1,21 @@
 <% provide(:title, "Choose your Preferences") %>
 <div class="row">
   <% if @matchup %>
+  <div style="text-align: center;">
     <%= form_for(current_user.preferences.new, :html => { :class => 'preferences' }) do |f| %>
     <%= radio_button_tag("preference", @matchup[0].show_id) %>
     <%= label_tag(:show, @matchup[0].name) %>
+    <br>
+    <h2 style="padding: 0; margin: 0;">OR</h2>
+    <br>
     <%= radio_button_tag("preference", @matchup[1].show_id) %>
     <%= label_tag(:show, @matchup[1].name) %>
     <%= hidden_field_tag("show_id1", @matchup[0].show_id) %>
     <%= hidden_field_tag("show_id2", @matchup[1].show_id) %>
+    <br>
     <%= f.submit :Submit %>
-    <li>
-      <%= @matchup[0].name %> vs. <%= @matchup[1].name %>
-    </li>
     <% end %>
     <a href="" onclick="location.reload();">Don't know either of these shows...</a>
   <% end %>
+  </div>
 </div>

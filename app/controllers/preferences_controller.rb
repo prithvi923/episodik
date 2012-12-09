@@ -22,7 +22,7 @@ class PreferencesController < ApplicationController
                 if current_user.preferences.count < 10
                   redirect_to new_preference_path, :notice => "Your preference has been saved" 
                 else
-                  redirect_to current_user
+                  redirect_to preference_path current_user
                 end
               }
       end
