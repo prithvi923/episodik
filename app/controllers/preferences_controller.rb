@@ -29,6 +29,19 @@ class PreferencesController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:id])
+    @preferences = @user.preferences
+    @matchups = []
+    pair = []
+    @preferences.each do |preference|
+      pair.push Tvshow.find(preference.hot_sid)
+      pair.push Tvshow.find(preference.not_sid)
+      @matchups.push pair
+      pair = []
+    end
+  end
+
   private
 
     def signed_in_user

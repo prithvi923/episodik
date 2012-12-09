@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208182052) do
+ActiveRecord::Schema.define(:version => 20121209020644) do
 
   create_table "genres", :force => true do |t|
     t.integer "show_id"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20121208182052) do
 
   add_index "histories", ["show_id", "user_id"], :name => "index_histories_on_show_id_and_user_id", :unique => true
 
-  create_table "preferences", :force => true do |t|
+  create_table "preferences", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "hot_sid"
     t.integer "not_sid"

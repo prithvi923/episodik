@@ -1,5 +1,14 @@
 <% provide(:title, "Your Preferences") %>
 <div class="row">
   <h1>Your Current Preferences</h1>
-  
+    <% if @matchups %>
+      <ul>
+        <% @matchups.each_with_index do |matchup, i| %>
+        <li>
+          <%= link_to matchup[0].name, matchup[0] %> over <%= link_to matchup[1].name, matchup[1] %>
+        </li>
+        <% end %>
+      </ul>
+    <% end %>
+  <p> <%= link_to "Make a new preference", new_preference_path %> </p>
 </div>

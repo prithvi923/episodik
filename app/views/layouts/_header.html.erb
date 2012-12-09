@@ -14,7 +14,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><%= link_to "Profile", current_user %></li>
-                    <li><%= link_to "Preferences", new_preference_path %></li>
+                    <li><%= link_to "Preferences", preference_path(current_user) %></li>
                     <li><%= link_to "Settings", edit_user_path(current_user) %></li>
                     <li class="divider"></li>
                     <li>
