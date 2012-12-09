@@ -7,9 +7,9 @@ Episodik::Application.routes.draw do
 
   root :to => 'static_pages#home'
 
+  match '/signout'=> 'sessions#destroy', :via => :get
   match '/signup' => 'users#new'
   match '/signin' => 'sessions#new'
-  match '/signout'=> 'sessions#destroy', :via => :delete
 
   match '/help' => 'static_pages#help'
 
