@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209020644) do
+ActiveRecord::Schema.define(:version => 20121209034853) do
 
   create_table "genres", :force => true do |t|
     t.integer "show_id"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(:version => 20121209020644) do
   add_index "preferences", ["hot_sid", "not_sid", "user_id"], :name => "index_preferences_on_hot_sid_and_not_sid_and_user_id", :unique => true
   add_index "preferences", ["not_sid"], :name => "not_sid"
   add_index "preferences", ["user_id", "hot_sid", "not_sid"], :name => "index_preferences_on_user_id_and_hot_sid_and_not_sid"
+
+  create_table "recommendations", :id => false, :force => true do |t|
+    t.integer "user_id", :null => false
+    t.integer "show_id", :null => false
+  end
+
+  add_index "recommendations", ["show_id"], :name => "show_id"
 
   create_table "tvshows", :primary_key => "show_id", :force => true do |t|
     t.string   "name"
