@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     end
     @rated_shows = @user.rated_shows
 
-    @recommendations = @user.recommended_shows
+    @recommendations = @user.recommended_shows.shuffle[0..10]
 
     respond_to do |format|
       format.html # show.html.erb

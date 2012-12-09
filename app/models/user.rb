@@ -30,6 +30,41 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :length => { :minimum => 6 }
   validates :password_confirmation, :presence => true
 
+  def generate_recommendations
+    delete_sql = "DELETE FROM recommendations WHERE user_id = #{self.id} 
+                  AND show_id IN (SELECT hot_sid FROM preferences WHERE user_id = #{self.id} 
+                    UNION SELECT not_sid FROM preferences WHERE user_id = #{self.id} 
+                    UNION SELECT show_id FROM histories WHERE user_id = #{self.id})"
+    ActiveRecord::Base.connection.execute(delete_sql)
+    recommendations = []
+    sql = "SELECT DISTINCT * FROM
+    (SELECT #{self.id}, show_id
+    FROM (SELECT tvshows.show_id, name, genre FROM tvshows, genres WHERE tvshows.show_id=genres.show_id) AS tvgenre2
+    WHERE genre IN
+        (SELECT genre FROM
+            (SELECT * FROM 
+            (SELECT hot_sid, COUNT(*) AS count FROM preferences 
+            WHERE user_id = #{self.id}
+            GROUP BY hot_sid) AS groups
+            HAVING count = (SELECT MAX(count) FROM (SELECT hot_sid, COUNT(*) AS count FROM preferences 
+            WHERE user_id = #{self.id}
+            GROUP BY hot_sid) AS groups2)
+            ) AS popular, (SELECT tvshows.show_id, name, genre FROM tvshows, genres WHERE tvshows.show_id=genres.show_id) AS tvgenre
+        WHERE popular.hot_sid = tvgenre.show_id)
+    ) AS raw 
+    WHERE NOT EXISTS (SELECT * FROM histories WHERE show_id = raw.show_id)
+    AND NOT EXISTS (SELECT * FROM preferences WHERE hot_sid = raw.show_id OR not_sid = raw.show_id);"
+
+    mysql_res = ActiveRecord::Base.connection.execute(sql)
+    mysql_res.each do |row|
+      recommendations.push Recommendation.new(:user_id => row[0], :show_id => row[1])
+    end
+    recommendations = recommendations.shuffle[0..9]
+    recommendations.each do |rec|
+      rec.save
+    end
+  end
+
   private
     def create_remember_token
       self.remember_token = SecureRandom.base64.tr("+/", "-_")

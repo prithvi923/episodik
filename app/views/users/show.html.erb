@@ -25,7 +25,7 @@
     <% end %>
     <% if @recommendations %>
     <p>
-      Your Recommendations:
+      Your Recommendations <a href="" onclick="location.reload();">(Refresh)</a>:
     </p>
     <ul>
       <% @recommendations.each_with_index do |rec, i| %>
