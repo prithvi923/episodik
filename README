@@ -1,0 +1,11 @@
+Lena Jia, Prithvi Prabahar, Tim Shih, and Bryan Yang
+COMPSCI 316
+December 10th, 2012
+Final
+Demo Setup
+
+We are using MySQL and Ruby on Rails for this project.
+
+To run this application, download and install MySQL and Ruby on Rails. 
+Once installed, run 'rake db:create' and run 'rake db:migrate' to update the databases.
+The databases should now be setup and the app can be run using 'rails s'
