@@ -23,5 +23,21 @@
       No shows rated yet! 
     </p>
     <% end %>
+    <% if @recommendations %>
+    <p>
+      Your Recommendations:
+    </p>
+    <ul>
+      <% @recommendations.each_with_index do |rec, i| %>
+      <li>
+        <%= link_to rec.name, rec %>
+      </li>
+      <% end %>
+    </ul>
+    <% else %>
+    <p>
+      No recommendations yet! 
+    </p>
+    <% end %>
   </aside>
 </div>

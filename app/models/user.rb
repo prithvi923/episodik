@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
   has_many :histories, :foreign_key => "user_id"
   has_many :rated_shows, :through => :histories, :source => :tvshow
   has_many :preferences, :foreign_key => "user_id"
+  has_many :recommendations, :foreign_key => "user_id"
+  has_many :recommended_shows, :through => :recommendations, :source => :tvshow
 
   before_save { |user| user.email = email.downcase }
   before_save :create_remember_token

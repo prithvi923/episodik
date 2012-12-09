@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     end
     @rated_shows = @user.rated_shows
 
+    @recommendations = @user.recommended_shows
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }
