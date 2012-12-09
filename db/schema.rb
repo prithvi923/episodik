@@ -10,19 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121209034853) do
+ActiveRecord::Schema.define(:version => 20121209070007) do
 
-  create_table "genres", :force => true do |t|
-    t.integer "show_id"
-    t.string  "genre"
+  create_table "genres", :id => false, :force => true do |t|
+    t.integer "show_id", :null => false
+    t.string  "genre",   :null => false
   end
 
   add_index "genres", ["show_id", "genre"], :name => "index_genres_on_show_id_and_genre", :unique => true
 
-  create_table "histories", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "show_id"
-    t.integer  "rating"
+  create_table "histories", :id => false, :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "show_id",    :null => false
+    t.integer  "rating",     :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(:version => 20121209034853) do
   add_index "histories", ["show_id", "user_id"], :name => "index_histories_on_show_id_and_user_id", :unique => true
 
   create_table "preferences", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "hot_sid"
-    t.integer "not_sid"
+    t.integer "user_id", :null => false
+    t.integer "hot_sid", :null => false
+    t.integer "not_sid", :null => false
   end
 
   add_index "preferences", ["hot_sid", "not_sid", "user_id"], :name => "index_preferences_on_hot_sid_and_not_sid_and_user_id", :unique => true
@@ -47,17 +47,17 @@ ActiveRecord::Schema.define(:version => 20121209034853) do
   add_index "recommendations", ["show_id"], :name => "show_id"
 
   create_table "tvshows", :primary_key => "show_id", :force => true do |t|
-    t.string   "name"
-    t.integer  "year"
-    t.integer  "seasons"
-    t.integer  "episode_length"
+    t.string   "name",           :null => false
+    t.integer  "year",           :null => false
+    t.integer  "seasons",        :null => false
+    t.integer  "episode_length", :null => false
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
-    t.string   "name"
+    t.string   "email",           :null => false
+    t.string   "name",            :null => false
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
